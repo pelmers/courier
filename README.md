@@ -1,5 +1,5 @@
-Pythrust!
+courier
 =========
 
-Thrust your files onto a server.
+Process selected directories intelligently and magically.
 --------------------------------
