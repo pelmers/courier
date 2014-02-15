@@ -18,7 +18,7 @@ USAGE = """\
         Calls on plugin to process path with optional [args].
         Type '{0} help plugin' for more info.
         Available plugins: {1}\
-        """.format(sys.argv[0], ' '.join(plugins.plugin_names()))
+        """.format("courier.py", ' '.join(plugins.plugin_names()))
 
 def main():
     if '-h' in sys.argv:
