@@ -24,5 +24,11 @@ def process(path, args):
         rsync_opts = ['-avz', "--exclude='*.git'"]
     # autocomplete path to get source paths
     source_paths = plugins.autocomplete.process(path, [env])
+    if len(source_paths) == 0:
+       return 'No matching source paths found'
+    if len(source_paths) > 1:
+        if input("Several paths matched: \n{}\nProcess all? ".format(
+            '\n'.join(source_paths))).lower() in ['no','nope','nah','n']:
+            return
     for src in source_paths:
         subprocess.call(['rsync']+rsync_opts+[src, dest])
