@@ -19,8 +19,8 @@ for mod in ['.'.join([os.path.split(plugin_dir)[1], os.path.split(f)[1]])
 def plugin_names():
     return [getattr(plugin, 'PLUGIN_NAME') for plugin in available_plugins.values()]
 
-def process(plugin, path, args):
+def process(plugin, path, args, env):
     try:
-        return available_plugins[plugin].process(path, args)
+        return available_plugins[plugin].process(path, args, env)
     except KeyError:
         sys.stderr.write("Error calling {} plugin.\n".format(plugin))

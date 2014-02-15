@@ -1,7 +1,9 @@
 """
 autocomplete plugin
+
 Autocompletes paths by matching a list of possibilities
 given by some environment variable.
+
 Usage:
     autocomplete path ENV_VAR [-d DEPTH]
 Returns a list of the possible autocompletions of path by using ENV_VAR
@@ -14,18 +16,18 @@ PLUGIN_NAME = 'autocomplete'
 import os, sys
 import os.path
 
-def process(path, args):
+def process(path, args, env):
     if not args:
         print('Expected environment variable name in args list')
         return []
     # default depth is 2 unless -d is given for depth
     depth = 2 if '-d' not in args else int(args[args.index('-d')+1])
-    env = os.getenv(args[0])
-    # set env to empty str instead of None if not found
-    env = '' if not env else env
-    paths = [p for p in env.split(':') if os.path.isdir(p)]
+    sources = env[args[0]]
+    # set source to empty str instead of None if not found
+    sources = '' if not sources else sources
+    paths = [p for p in sources.split(':') if os.path.isdir(p)]
     if len(paths) == 0:
-        print('autocomplete could not find valid paths from given env.')
+        print('autocomplete could not find valid paths from given sources.')
         return []
     # lowercase everything, we want case insensitive matches
     # we're also only matching on the last part of each path

@@ -9,7 +9,7 @@ import plugins
 
 PLUGIN_NAME = 'help'
 
-def process(plugin, args):
+def process(plugin, args, _e):
     if plugin not in plugins.plugin_names():
         return "{} plugin not found.".format(plugin)
     else:

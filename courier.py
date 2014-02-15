@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys
+import sys, os
 if sys.version[0] != '3':
     print("Beware: python version < 3, some features may not behave properly.")
 
@@ -32,7 +32,8 @@ def main():
         output_and_exit('Insufficient arguments supplied.\n{}\n'.format(USAGE))
     if plugin not in plugins.plugin_names():
         output_and_exit('{} not an available plugin.\n{}\n'.format(plugin, USAGE))
-    ret = plugins.process(plugin, path, args)
+    env = os.environ
+    ret = plugins.process(plugin, path, args, env)
     if ret:
         print(ret)
 
