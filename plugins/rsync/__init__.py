@@ -16,8 +16,7 @@ import subprocess, plugins.autocomplete
 
 def process(path, args):
     if len(args) < 2:
-        print('Rsync plugin expected at least two arguments after path')
-        return
+        return 'Rsync plugin expected at least two arguments after path'
     rsync_opts = args[2:]
     env = args[0]
     dest = args[1]

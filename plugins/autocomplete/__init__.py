@@ -21,9 +21,11 @@ def process(path, args):
     # default depth is 2 unless -d is given for depth
     depth = 2 if '-d' not in args else int(args[args.index('-d')+1])
     env = os.getenv(args[0])
+    # set env to empty str instead of None if not found
+    env = '' if not env else env
     paths = [p for p in env.split(':') if os.path.isdir(p)]
     if len(paths) == 0:
-        print('autocomplete could not find paths in given env.')
+        print('autocomplete could not find valid paths from given env.')
         return []
     # lowercase everything, we want case insensitive matches
     # we're also only matching on the last part of each path

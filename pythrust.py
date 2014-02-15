@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
 import sys
+if sys.version[0] != '3':
+    print("Beware: python version < 3, some features may not behave properly.")
+
 def output_and_exit(msg):
     sys.stderr.write(msg)
     sys.exit(1)
@@ -11,16 +14,16 @@ except ImportError:
     output_and_exit('Cannot find any plugins\n')
 
 USAGE = """\
-        Usage: {} plugin path [args]
+        Usage: {0} plugin path [args]
         Calls on plugin to process path with optional [args].
-        Type 'help plugin' for more info.
-        Available plugins: {}\
+        Type '{0} help plugin' for more info.
+        Available plugins: {1}\
         """.format(sys.argv[0], ' '.join(plugins.plugin_names()))
 
 def main():
     if '-h' in sys.argv:
         print(USAGE)
-        sys.exit(0)
+        return
     try:
         plugin = sys.argv[1]
         path = sys.argv[2]
