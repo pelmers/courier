@@ -24,6 +24,8 @@ def process(path, args):
     if len(args) < 2:
         # special case: we want to ssh instead
         if path == 'ssh':
+            if len(args) < 1:
+                return 'A NetID must be supplied to use rice ssh.'
             subprocess.call(['ssh', '{}@ssh.clear.rice.edu'.format(args[0])])
             return
         return 'rice plugin expects at least two arguments after source path'
