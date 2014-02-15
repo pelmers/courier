@@ -1,5 +1,5 @@
-courier: process selected directories intelligently and magically.
-=========
+courier
+=======
 
 Brief overview:
 ---------------
