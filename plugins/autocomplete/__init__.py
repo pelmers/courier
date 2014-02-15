@@ -3,7 +3,7 @@ autocomplete plugin
 Autocompletes paths by matching a list of possibilities
 given by some environment variable.
 Usage:
-    autocomplete path -e ENV_VAR [-d DEPTH]
+    autocomplete path ENV_VAR [-d DEPTH]
 Returns a list of the possible autocompletions of path by using ENV_VAR
 as a list of possible matches and including subdirectories up
 to depth DEPTH (default: 2).
@@ -15,12 +15,12 @@ import os, sys
 import os.path
 
 def process(path, args):
-    if '-e' not in args:
-        print('Expected -e in args for autocomplete')
+    if not args:
+        print('Expected environment variable name in args list')
         return []
     # default depth is 2 unless -d is given for depth
     depth = 2 if '-d' not in args else int(args[args.index('-d')+1])
-    env = os.getenv(args[args.index('-e')+1]) or ''
+    env = os.getenv(args[0])
     paths = [p for p in env.split(':') if os.path.isdir(p)]
     if len(paths) == 0:
         print('autocomplete could not find paths in given env.')
